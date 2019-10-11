@@ -95,17 +95,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _pickNumberWidget(int number) {
     return Expanded(
       child: Center(
-        child: Text(
-          '$number',
-          style: TextStyle(
+        child: Container(
+          decoration: BoxDecoration(
             color: number >= 40
                 ? Colors.green
                 : number >= 30
-                    ? Colors.grey
-                    : number >= 20
-                        ? Colors.red
-                        : number >= 10 ? Colors.blue : Colors.orange,
-            fontSize: 40.0,
+                ? Colors.grey
+                : number >= 20
+                ? Colors.red
+                : number >= 10 ? Colors.blue : Colors.orange,
+            shape: BoxShape.circle,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              '$number',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 40.0,
+              ),
+            ),
           ),
         ),
       ),
