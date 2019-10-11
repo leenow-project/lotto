@@ -67,18 +67,22 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               '로또 당첨 번호',
-              style: TextStyle(
-                fontSize: 32.0
-              ),
+              style: TextStyle(fontSize: 32.0),
             ),
             Row(
               children: <Widget>[
+                Expanded(
+                  child: Center(),
+                ),
                 _pickNumberWidget(nums[0]),
                 _pickNumberWidget(nums[1]),
                 _pickNumberWidget(nums[2]),
                 _pickNumberWidget(nums[3]),
                 _pickNumberWidget(nums[4]),
                 _pickNumberWidget(nums[5]),
+                Expanded(
+                  child: Center(),
+                ),
               ],
             )
           ],
@@ -93,27 +97,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _pickNumberWidget(int number) {
-    return Expanded(
-      child: Center(
-        child: Container(
-          decoration: BoxDecoration(
-            color: number >= 40
-                ? Colors.green
-                : number >= 30
-                ? Colors.grey
-                : number >= 20
-                ? Colors.red
-                : number >= 10 ? Colors.blue : Colors.orange,
-            shape: BoxShape.circle,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              '$number',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 40.0,
-              ),
+    return Center(
+      child: Container(
+        decoration: BoxDecoration(
+          color: number >= 40
+              ? Colors.green
+              : number >= 30
+                  ? Colors.grey
+                  : number >= 20
+                      ? Colors.red
+                      : number >= 10 ? Colors.blue : Colors.orange,
+          shape: BoxShape.circle,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text(
+            '$number',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.0,
             ),
           ),
         ),
