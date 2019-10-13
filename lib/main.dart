@@ -36,8 +36,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List<int> _nums = [0, 0, 0, 0, 0, 0];
   List<int> _tempNums = [];
   final _random = new Random();
-  int _episodeNum = 880;
+  String _episodeNum = '880';
+  String _currentEpisode = '880';
   Ads appAds;
+  List<DropdownMenuItem<String>> _dropDownMenuItems;
 
   final String appId = Platform.isAndroid
       ? 'ca-app-pub-2558645202827085~8690630192'
@@ -52,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    _dropDownMenuItems = getDropDownMenuItems();
     appAds = Ads(
       appId,
       bannerUnitId: bannerUnitId,
@@ -90,6 +93,25 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+
+  List<DropdownMenuItem<String>> getDropDownMenuItems() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (int i = 1; i < 881; i++) {
+      items.add(new DropdownMenuItem(
+          value: '$i',
+          child: new Text('$i')
+      ));
+    }
+    return items;
+  }
+
+  void changedDropDownItem(String selectEpisode) {
+    setState(() {
+      _currentEpisode = selectEpisode;
+      _historyBloc.fetch(_currentEpisode);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,8 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            DropdownButton(
+              value: '$_currentEpisode',
+              items: _dropDownMenuItems,
+              onChanged: changedDropDownItem,
+            ),
             Text(
-              '$_episodeNum회차 번호',
+              '$_currentEpisode회차 번호',
               style: TextStyle(fontSize: 32.0),
             ),
             StreamBuilder<History>(
@@ -122,6 +149,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             _pickNumberWidget(snapshot.data.drwtNo4),
                             _pickNumberWidget(snapshot.data.drwtNo5),
                             _pickNumberWidget(snapshot.data.drwtNo6),
+                            Icon(Icons.add),
+                            _pickNumberWidget(snapshot.data.bnusNo),
                             Expanded(
                               child: Center(),
                             ),
@@ -171,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _pickNumberWidget(int number) {
     return Center(
       child: Container(
-        width: 48,
+        width: 44,
         decoration: BoxDecoration(
           color: number >= 40
               ? Colors.green
@@ -189,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$number',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 24.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

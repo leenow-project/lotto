@@ -7,11 +7,11 @@ import 'package:http/http.dart' as http;
 class HistoryBloc {
   final _historySubject = BehaviorSubject<History>();
 
-  HistoryBloc(int episode) {
+  HistoryBloc(String episode) {
     fetch(episode);
   }
 
-  void fetch(int episode) async {
+  void fetch(String episode) async {
     var history = await getHistoryData(episode);
     _historySubject.add(history);
   }
@@ -24,7 +24,7 @@ class HistoryBloc {
 
   final String baseUrl = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=';
 
-  Future<History> getHistoryData(int episode) async {
+  Future<History> getHistoryData(String episode) async {
     final response = await http.get('$baseUrl$episode');
     if (response.statusCode == 200) {
       return History.fromJson(json.decode(response.body));
