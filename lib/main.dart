@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:ads/ads.dart';
+//import 'package:ads/ads.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -36,8 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<int> _nums = [0, 0, 0, 0, 0, 0];
   List<int> _tempNums = [];
   final _random = new Random();
-  String _episodeNum = '880';
-  String _currentEpisode = '880';
+  String _episodeNum = '889';
+  String _currentEpisode = '889';
 //  Ads appAds;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
-    for (int i = 1; i < 881; i++) {
+    for (int i = 1; i < 890; i++) {
       items.add(new DropdownMenuItem(
           value: '$i',
           child: new Text('$i')
@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget _pickNumberWidget(int number) {
     return Center(
       child: Container(
-        width: 44,
+        width: 48,
         decoration: BoxDecoration(
           color: number >= 40
               ? Colors.green
