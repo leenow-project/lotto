@@ -38,16 +38,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final _random = new Random();
   String _episodeNum = '880';
   String _currentEpisode = '880';
-  Ads appAds;
+//  Ads appAds;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
-  final String appId = Platform.isAndroid
-      ? 'ca-app-pub-2558645202827085~8690630192'
-      : '';
-
-  final String bannerUnitId = Platform.isAndroid
-      ? 'ca-app-pub-2558645202827085/6996057533'
-      : '';
+//  final String appId = Platform.isAndroid
+//      ? 'ca-app-pub-2558645202827085~8690630192'
+//      : '';
+//
+//  final String bannerUnitId = Platform.isAndroid
+//      ? 'ca-app-pub-2558645202827085/6996057533'
+//      : '';
 
   int next(int min, int max) => min + _random.nextInt(max - min);
 
@@ -55,15 +55,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     _dropDownMenuItems = getDropDownMenuItems();
-    appAds = Ads(
-      appId,
-      bannerUnitId: bannerUnitId,
-      childDirected: false,
-      testDevices: ['Samsung_Galaxy_SII_API_26:5554'],
-      testing: true,
-    );
-
-    appAds.showBannerAd();
+//    appAds = Ads(
+//      appId,
+//      bannerUnitId: bannerUnitId,
+//      childDirected: false,
+//      testDevices: ['Samsung_Galaxy_SII_API_26:5554'],
+//      testing: true,
+//    );
+//
+//    appAds.showBannerAd();
 
     _historyBloc = HistoryBloc(_episodeNum);
     _shackNumber();
