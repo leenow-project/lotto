@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -41,18 +42,19 @@ class _MyHomePageState extends State<MyHomePage> {
 //  Ads appAds;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
-//  final String appId = Platform.isAndroid
-//      ? 'ca-app-pub-2558645202827085~8690630192'
-//      : '';
-//
-//  final String bannerUnitId = Platform.isAndroid
-//      ? 'ca-app-pub-2558645202827085/6996057533'
-//      : '';
+  final String appId = Platform.isAndroid
+      ? 'ca-app-pub-2558645202827085~8690630192'
+      : 'ca-app-pub-2558645202827085~2660961748';
+
+  final String bannerUnitId = Platform.isAndroid
+      ? 'ca-app-pub-2558645202827085/6996057533'
+      : 'ca-app-pub-3940256099942544/2934735716';
 
   int next(int min, int max) => min + _random.nextInt(max - min);
 
 
   @override
+  // ignore: must_call_super
   void initState() {
     _dropDownMenuItems = getDropDownMenuItems();
 //    appAds = Ads(
@@ -116,6 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(widget.title),
       ),
       body: Center(
