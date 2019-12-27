@@ -1,6 +1,6 @@
 import 'dart:io';
 
-//import 'package:ads/ads.dart';
+import 'package:ads/ads.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
@@ -39,16 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
   final _random = new Random();
   String _episodeNum = '889';
   String _currentEpisode = '889';
-//  Ads appAds;
+  Ads appAds;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
   final String appId = Platform.isAndroid
       ? 'ca-app-pub-2558645202827085~8690630192'
-      : 'ca-app-pub-2558645202827085~2660961748';
+      : 'ca-app-pub-4196993510412288~8645029551';
 
   final String bannerUnitId = Platform.isAndroid
       ? 'ca-app-pub-2558645202827085/6996057533'
-      : 'ca-app-pub-3940256099942544/2934735716';
+      : 'ca-app-pub-4196993510412288/6827716700';
 
   int next(int min, int max) => min + _random.nextInt(max - min);
 
@@ -57,15 +57,15 @@ class _MyHomePageState extends State<MyHomePage> {
   // ignore: must_call_super
   void initState() {
     _dropDownMenuItems = getDropDownMenuItems();
-//    appAds = Ads(
-//      appId,
-//      bannerUnitId: bannerUnitId,
-//      childDirected: false,
-//      testDevices: ['Samsung_Galaxy_SII_API_26:5554'],
-//      testing: true,
-//    );
-//
-//    appAds.showBannerAd();
+    appAds = Ads(
+      appId,
+      bannerUnitId: bannerUnitId,
+      childDirected: false,
+      testDevices: ['Samsung_Galaxy_SII_API_26:5554'],
+      testing: false,
+    );
+
+    appAds.showBannerAd();
 
     _historyBloc = HistoryBloc(_episodeNum);
     _shackNumber();
