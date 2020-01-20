@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final _random = new Random();
   String _episodeNum = '889';
   String _currentEpisode = '889';
+
 //  Ads appAds;
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
@@ -51,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> {
       : 'ca-app-pub-3940256099942544/2934735716';
 
   int next(int min, int max) => min + _random.nextInt(max - min);
-
 
   @override
   // ignore: must_call_super
@@ -95,14 +95,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
     for (int i = 1; i < 890; i++) {
-      items.add(new DropdownMenuItem(
-          value: '$i',
-          child: new Text('$i')
-      ));
+      items.add(new DropdownMenuItem(value: '$i', child: new Text('$i')));
     }
     return items;
   }
@@ -125,13 +121,29 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            DropdownButton(
-              value: '$_currentEpisode',
-              items: _dropDownMenuItems,
-              onChanged: changedDropDownItem,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(right: 8.0),
+                  child: Text(
+                    '로또 회차 선택',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: Colors.black54
+                    ),
+                  ),
+                ),
+                DropdownButton(
+                  value: '$_currentEpisode',
+                  items: _dropDownMenuItems,
+                  onChanged: changedDropDownItem,
+                ),
+              ],
             ),
             Text(
-              '$_currentEpisode회차 번호',
+              '$_currentEpisode회차 당첨 번호',
               style: TextStyle(fontSize: 32.0),
             ),
             StreamBuilder<History>(
@@ -141,33 +153,45 @@ class _MyHomePageState extends State<MyHomePage> {
                 return !snapshot.hasData
                     ? CircularProgressIndicator()
                     : Container(
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Center(),
+                        child: Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              '${snapshot.data.drwNoDate}',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                              ),
                             ),
-                            _pickNumberWidget(snapshot.data.drwtNo1),
-                            _pickNumberWidget(snapshot.data.drwtNo2),
-                            _pickNumberWidget(snapshot.data.drwtNo3),
-                            _pickNumberWidget(snapshot.data.drwtNo4),
-                            _pickNumberWidget(snapshot.data.drwtNo5),
-                            _pickNumberWidget(snapshot.data.drwtNo6),
-                            Icon(Icons.add),
-                            _pickNumberWidget(snapshot.data.bnusNo),
-                            Expanded(
-                              child: Center(),
-                            ),
-                          ],
-                        ),
-                      );
+                            margin: EdgeInsets.only(bottom: 8.0),
+                          ),
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Center(),
+                              ),
+                              _pickNumberWidget(snapshot.data.drwtNo1),
+                              _pickNumberWidget(snapshot.data.drwtNo2),
+                              _pickNumberWidget(snapshot.data.drwtNo3),
+                              _pickNumberWidget(snapshot.data.drwtNo4),
+                              _pickNumberWidget(snapshot.data.drwtNo5),
+                              _pickNumberWidget(snapshot.data.drwtNo6),
+                              Icon(Icons.add),
+                              _pickNumberWidget(snapshot.data.bnusNo),
+                              Expanded(
+                                child: Center(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ));
               },
             ),
             Divider(
               thickness: 2.0,
-              height: 48,
+              height: 96,
             ),
             Text(
-              '로또 행운 번호',
+              '로또 행운 번호 생성',
               style: TextStyle(fontSize: 32.0),
             ),
             Row(
