@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>17531284333-3r3lvcpdjtqt6sc6t8c79mojh1les82j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.17531284333-3r3lvcpdjtqt6sc6t8c79mojh1les82j</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAlPn8J0BBX6utHw_UqCQcNX7OZjQ05_3s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>17531284333</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.leenow.lotto</string>
+	<key>PROJECT_ID</key>
+	<string>lotto-23bee</string>
+	<key>STORAGE_BUCKET</key>
+	<string>lotto-23bee.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:17531284333:ios:4ab04c6be2dee0052e0864</string>
+	<key>DATABASE_URL</key>
+	<string>https://lotto-23bee.firebaseio.com</string>
+</dict>
+</plist>

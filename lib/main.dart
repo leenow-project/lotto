@@ -37,8 +37,10 @@ class _MyHomePageState extends State<MyHomePage> {
   List<int> _nums = [0, 0, 0, 0, 0, 0];
   List<int> _tempNums = [];
   final _random = new Random();
-  String _episodeNum = '889';
-  String _currentEpisode = '889';
+
+  int basicEpisodeNum = 893;
+  String _episodeNum = '893';
+  String _currentEpisode = '893';
 
 //  Ads appAds;
 
@@ -57,6 +59,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   // ignore: must_call_super
   void initState() {
+    DateTime basicDate = DateTime(2020, 1, 11, 21);
+    DateTime nowDate = DateTime.now();
+
+    final differenceWeek = (nowDate.difference(basicDate).inDays / 7).floor();
+
+    _episodeNum = (basicEpisodeNum + differenceWeek).toString();
+    _currentEpisode = (basicEpisodeNum + differenceWeek).toString();
+
+    print('difference: $differenceWeek');
+
     _dropDownMenuItems = getDropDownMenuItems();
 
     BannerAd myBanner = BannerAd(
@@ -106,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
-    for (int i = 1; i < 890; i++) {
+    for (int i = 1; i < int.parse(_episodeNum) + 1; i++) {
       items.add(new DropdownMenuItem(value: '$i', child: new Text('$i')));
     }
     return items;
@@ -138,10 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     '로또 회차 선택',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16.0,
-                      color: Colors.black54
-                    ),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                        color: Colors.black54),
                   ),
                 ),
                 DropdownButton(

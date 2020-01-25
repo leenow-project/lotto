@@ -8,8 +8,8 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
-    GADMobileAds.sharedInstance().start(completionHandler: nil)
     GeneratedPluginRegistrant.register(with: self)
+    GADMobileAds.sharedInstance().start(completionHandler: nil)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
