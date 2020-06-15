@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_admob/firebase_admob.dart';
@@ -5,7 +6,11 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'package:lotto/provider/history_bloc.dart';
+import 'package:lotto/route/result_route.dart';
 import 'model/history_model.dart';
+
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int basicEpisodeNum = 893;
   String _episodeNum = '893';
   String _currentEpisode = '893';
+  String _scanText = '';
 
 //  Ads appAds;
 
@@ -55,6 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
       : 'ca-app-pub-4196993510412288/6827716700';
 
   int next(int min, int max) => min + _random.nextInt(max - min);
+
+  BannerAd bannerAd = BannerAd(
+      adUnitId: BannerAd.testAdUnitId,
+      size: AdSize.banner,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event is $event");
+      });
 
   @override
   // ignore: must_call_super
@@ -71,22 +84,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _dropDownMenuItems = getDropDownMenuItems();
 
-    BannerAd myBanner = BannerAd(
-      adUnitId: bannerUnitId,
-      size: AdSize.smartBanner,
-      listener: (MobileAdEvent event) {
-        print("BannerAd event is $event");
-      },
-    );
-
-    myBanner
+    FirebaseAdMob.instance.initialize(appId: appId);
+    bannerAd
       ..load()
-      ..show(
-        anchorOffset: 0.0,
-        horizontalCenterOffset: 0.0,
-        // Banner Position
-        anchorType: AnchorType.bottom,
-      );
+      ..show();
 
     _historyBloc = HistoryBloc(_episodeNum);
     _shackNumber();
@@ -206,9 +207,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       ));
               },
             ),
+            SizedBox(
+              height: 40,
+            ),
+            FloatingActionButton(
+              heroTag: null,
+              onPressed: _scan,
+              tooltip: 'QR 코드 스캔',
+              child: Icon(Icons.settings_overscan),
+            ),
             Divider(
               thickness: 2.0,
-              height: 96,
+              height: 48,
             ),
             Text(
               '로또 행운 번호 생성',
@@ -235,8 +245,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FloatingActionButton(
               onPressed: _shackNumber,
-              tooltip: 'Increment',
+              tooltip: '로또 번호 새로고침',
               child: Icon(Icons.refresh),
+            ),
+            SizedBox(
+              height: 80,
             ),
           ],
         ),
@@ -272,6 +285,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Future _scan() async {
+    var result = await BarcodeScanner.scan();
+    setState(() {
+      var type = result.type;
+      var rawContent = result.rawContent;
+      var format = result.format;
+      var formatNote = result.formatNote;
+
+//      this._scanText = result.rawContent.toString();
+    });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ResultRoute(result.rawContent)),
     );
   }
 }
