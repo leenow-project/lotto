@@ -55,10 +55,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ? 'ca-app-pub-4196993510412288~2795605371'
       : 'ca-app-pub-4196993510412288~8645029551';
 
-  final String bannerUnitId = Platform.isAndroid
-      ? 'ca-app-pub-4196993510412288/9169442036'
-      : 'ca-app-pub-4196993510412288/6827716700';
-
   int next(int min, int max) => min + _random.nextInt(max - min);
 
   BannerAd bannerAd = BannerAd(
@@ -141,21 +137,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-//            Row(
-//              mainAxisAlignment: MainAxisAlignment.center,
-//              children: <Widget>[
-//                Container(
-//                  margin: EdgeInsets.only(right: 8.0),
-//                  child: Text(
-//                    '회차 선택',
-//                    style: TextStyle(
-//                        fontWeight: FontWeight.bold,
-//                        fontSize: 24.0,
-//                        color: Colors.black54),
-//                  ),
-//                ),
-//              ],
-//            ),
             Text(
               '회차 당첨 번호 확인',
               style: TextStyle(
