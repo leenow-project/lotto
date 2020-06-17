@@ -156,6 +156,16 @@ class _MyHomePageState extends State<MyHomePage> {
 //                ),
 //              ],
 //            ),
+            Text(
+              '회차 당첨 번호 확인',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0,
+                  color: Colors.black54),
+            ),
+            SizedBox(
+              height: 8,
+            ),
             DirectSelect(
               itemExtent: 54.0,
               selectedIndex: selectedIndex,
@@ -174,12 +184,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   .map((e) => MySelectionItem(title: e.toString()))
                   .toList(),
             ),
-            Text(
-              '회차 당첨 번호',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24.0,
-                  color: Colors.black54),
+            SizedBox(
+              height: 8,
             ),
             StreamBuilder<History>(
               stream: _historyBloc.history$,
@@ -195,6 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               '${snapshot.data.drwNoDate}',
                               style: TextStyle(
                                 fontSize: 20.0,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                             margin: EdgeInsets.only(bottom: 8.0),
@@ -222,7 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
               },
             ),
             SizedBox(
-              height: 40,
+              height: 16,
             ),
             FloatingActionButton(
               heroTag: null,
@@ -236,7 +243,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '로또 행운 번호 생성',
-              style: TextStyle(fontSize: 32.0),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0,
+                  color: Colors.black54),
+            ),
+            SizedBox(
+              height: 16,
             ),
             Row(
               children: <Widget>[
@@ -255,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             SizedBox(
-              height: 40,
+              height: 16,
             ),
             FloatingActionButton(
               onPressed: _shackNumber,
@@ -304,14 +317,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future _scan() async {
     var result = await BarcodeScanner.scan();
-    setState(() {
-      var type = result.type;
-      var rawContent = result.rawContent;
-      var format = result.format;
-      var formatNote = result.formatNote;
-
-//      this._scanText = result.rawContent.toString();
-    });
 
     Navigator.push(
       context,
@@ -355,7 +360,14 @@ class MySelectionItem extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,
-      child: Text(title),
+      child: Text(
+        title,
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 20.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
