@@ -81,11 +81,9 @@ class _MyHomePageState extends State<MyHomePage> {
     _episodeNum = (basicEpisodeNum + differenceWeek).toString();
     _currentEpisode = (basicEpisodeNum + differenceWeek).toString();
 
-    for (int i = 0; i < totalEpisode; i++) {
+    for (int i = totalEpisode; i > 0; i--) {
       episodeList.add(i);
     }
-
-    print('difference: $differenceWeek');
 
     _dropDownMenuItems = getDropDownMenuItems();
 
@@ -130,13 +128,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return items;
   }
 
-  void changedDropDownItem(String selectEpisode) {
-    setState(() {
-      _currentEpisode = selectEpisode;
-      _historyBloc.fetch(_currentEpisode);
-    });
-  }
-
   int selectedIndex = 0;
 
   @override
@@ -150,29 +141,23 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(right: 8.0),
-                  child: Text(
-                    '로또 회차 선택',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
-                        color: Colors.black54),
-                  ),
-                ),
-                DropdownButton(
-                  value: '$_currentEpisode',
-                  items: _dropDownMenuItems,
-                  onChanged: changedDropDownItem,
-                ),
-              ],
-            ),
-
+//            Row(
+//              mainAxisAlignment: MainAxisAlignment.center,
+//              children: <Widget>[
+//                Container(
+//                  margin: EdgeInsets.only(right: 8.0),
+//                  child: Text(
+//                    '회차 선택',
+//                    style: TextStyle(
+//                        fontWeight: FontWeight.bold,
+//                        fontSize: 24.0,
+//                        color: Colors.black54),
+//                  ),
+//                ),
+//              ],
+//            ),
             DirectSelect(
-              itemExtent: 35.0,
+              itemExtent: 54.0,
               selectedIndex: selectedIndex,
               child: MySelectionItem(
                 isForList: false,
@@ -181,6 +166,8 @@ class _MyHomePageState extends State<MyHomePage> {
               onSelectedItemChanged: (index) {
                 setState(() {
                   selectedIndex = index;
+                  _currentEpisode = episodeList[index].toString();
+                  _historyBloc.fetch(_currentEpisode);
                 });
               },
               items: episodeList
@@ -188,8 +175,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   .toList(),
             ),
             Text(
-              '$_currentEpisode회차 당첨 번호',
-              style: TextStyle(fontSize: 32.0),
+              '회차 당첨 번호',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24.0,
+                  color: Colors.black54),
             ),
             StreamBuilder<History>(
               stream: _historyBloc.history$,
