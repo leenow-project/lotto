@@ -51,18 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
-  final String appId = Platform.isAndroid
-      ? 'ca-app-pub-4196993510412288~2795605371'
-      : 'ca-app-pub-4196993510412288~8645029551';
-
   int next(int min, int max) => min + _random.nextInt(max - min);
 
-  BannerAd bannerAd = BannerAd(
+  BannerAd bannerAd  = BannerAd(
       adUnitId: Platform.isAndroid
           ? 'ca-app-pub-4196993510412288/9169442036'
           : 'ca-app-pub-4196993510412288/6827716700',
       size: AdSize.banner,
       listener: (MobileAdEvent event) {
+        print('Platform.isAndroid: ${Platform.isAndroid}');
         print("BannerAd event is $event");
       });
 
@@ -85,7 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _dropDownMenuItems = getDropDownMenuItems();
 
-    FirebaseAdMob.instance.initialize(appId: appId);
+    FirebaseAdMob.instance.initialize(
+        appId: Platform.isAndroid
+            ? 'ca-app-pub-4196993510412288~2795605371'
+            : 'ca-app-pub-4196993510412288~8645029551');
     bannerAd
       ..load()
       ..show();
