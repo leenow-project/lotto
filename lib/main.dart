@@ -58,7 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int next(int min, int max) => min + _random.nextInt(max - min);
 
   BannerAd bannerAd = BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
+      adUnitId: Platform.isAndroid
+          ? 'ca-app-pub-4196993510412288/9169442036'
+          : 'ca-app-pub-4196993510412288/6827716700',
       size: AdSize.banner,
       listener: (MobileAdEvent event) {
         print("BannerAd event is $event");
@@ -286,7 +288,7 @@ class _MyHomePageState extends State<MyHomePage> {
               '$number',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 20.0,
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -1,4 +1,4 @@
-package com.leenow.lotto.lotto
+package com.leenow.lotto
 
 import android.os.Bundle
 
