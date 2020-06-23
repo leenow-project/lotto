@@ -16,7 +16,7 @@ dependencies:
   firebase_admob: ^0.9.3
   barcode_scan: ^3.0.0
   webview_flutter: ^0.3.21
-  direct_select: ^1.0.2
+  smart_select: ^3.0.3
 
 dev_dependencies:
   flutter_test:

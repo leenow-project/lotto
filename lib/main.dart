@@ -10,7 +10,7 @@ import 'package:lotto/route/result_route.dart';
 import 'model/history_model.dart';
 
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:direct_select/direct_select.dart';
+import 'package:smart_select/smart_select.dart';
 
 void main() => runApp(MyApp());
 
@@ -49,11 +49,18 @@ class _MyHomePageState extends State<MyHomePage> {
   String _currentEpisode = '893';
   String _scanText = '';
 
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
+  List<SmartSelectOption<String>> _dropDownMenuItems;
+
+  String value = 'flutter';
+  List<SmartSelectOption<String>> options = [
+    SmartSelectOption<String>(value: 'ion', title: 'Ionic'),
+    SmartSelectOption<String>(value: 'flu', title: 'Flutter'),
+    SmartSelectOption<String>(value: 'rea', title: 'React Native'),
+  ];
 
   int next(int min, int max) => min + _random.nextInt(max - min);
 
-  BannerAd bannerAd  = BannerAd(
+  BannerAd bannerAd = BannerAd(
       adUnitId: Platform.isAndroid
           ? 'ca-app-pub-4196993510412288/9169442036'
           : 'ca-app-pub-4196993510412288/6827716700',
@@ -118,10 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> items = new List();
+  List<SmartSelectOption<String>> getDropDownMenuItems() {
+    List<SmartSelectOption<String>> items = new List();
     for (int i = 1; i < int.parse(_episodeNum) + 1; i++) {
-      items.add(new DropdownMenuItem(value: '$i', child: new Text('$i')));
+      items.add(new SmartSelectOption(value: '$i'));
     }
     return items;
   }
@@ -149,24 +156,31 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 8,
             ),
-            DirectSelect(
-              itemExtent: 54.0,
-              selectedIndex: selectedIndex,
-              child: MySelectionItem(
-                isForList: false,
-                title: episodeList[selectedIndex].toString(),
-              ),
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  selectedIndex = index;
-                  _currentEpisode = episodeList[index].toString();
-                  _historyBloc.fetch(_currentEpisode);
-                });
-              },
-              items: episodeList
-                  .map((e) => MySelectionItem(title: e.toString()))
-                  .toList(),
-            ),
+
+            SmartSelect<String>.single(
+                title: 'Frameworks',
+                value: value,
+                options: options,
+                onChange: (val) => setState(() => value = val)),
+
+//            DirectSelect(
+//              itemExtent: 54.0,
+//              selectedIndex: selectedIndex,
+//              child: MySelectionItem(
+//                isForList: false,
+//                title: episodeList[selectedIndex].toString(),
+//              ),
+//              onSelectedItemChanged: (index) {
+//                setState(() {
+//                  selectedIndex = index;
+//                  _currentEpisode = episodeList[index].toString();
+//                  _historyBloc.fetch(_currentEpisode);
+//                });
+//              },
+//              items: episodeList
+//                  .map((e) => MySelectionItem(title: e.toString()))
+//                  .toList(),
+//            ),
             SizedBox(
               height: 8,
             ),
