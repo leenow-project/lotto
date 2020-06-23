@@ -51,13 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<SmartSelectOption<String>> _dropDownMenuItems;
 
-  String value = 'flutter';
-  List<SmartSelectOption<String>> options = [
-    SmartSelectOption<String>(value: 'ion', title: 'Ionic'),
-    SmartSelectOption<String>(value: 'flu', title: 'Flutter'),
-    SmartSelectOption<String>(value: 'rea', title: 'React Native'),
-  ];
-
   int next(int min, int max) => min + _random.nextInt(max - min);
 
   BannerAd bannerAd = BannerAd(
@@ -127,8 +120,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<SmartSelectOption<String>> getDropDownMenuItems() {
     List<SmartSelectOption<String>> items = new List();
-    for (int i = 1; i < int.parse(_episodeNum) + 1; i++) {
-      items.add(new SmartSelectOption(value: '$i'));
+    for (int i = int.parse(_episodeNum); i > 0; i--) {
+      items.add(new SmartSelectOption(value: '$i', title: '$i회차'));
     }
     return items;
   }
@@ -156,31 +149,15 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               height: 8,
             ),
-
             SmartSelect<String>.single(
-                title: 'Frameworks',
-                value: value,
-                options: options,
-                onChange: (val) => setState(() => value = val)),
-
-//            DirectSelect(
-//              itemExtent: 54.0,
-//              selectedIndex: selectedIndex,
-//              child: MySelectionItem(
-//                isForList: false,
-//                title: episodeList[selectedIndex].toString(),
-//              ),
-//              onSelectedItemChanged: (index) {
-//                setState(() {
-//                  selectedIndex = index;
-//                  _currentEpisode = episodeList[index].toString();
-//                  _historyBloc.fetch(_currentEpisode);
-//                });
-//              },
-//              items: episodeList
-//                  .map((e) => MySelectionItem(title: e.toString()))
-//                  .toList(),
-//            ),
+              title: '회차 선택',
+              value: _currentEpisode,
+              options: _dropDownMenuItems,
+              onChange: (val) => setState(() {
+                _currentEpisode = val;
+                _historyBloc.fetch(_currentEpisode);
+              }),
+            ),
             SizedBox(
               height: 8,
             ),
